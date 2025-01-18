@@ -1,4 +1,6 @@
 from pathlib import Path
+from urllib.parse import urlparse
+
 from decouple import config
 import os
 from django.conf.global_settings import STATICFILES_DIRS, STATIC_ROOT
@@ -68,13 +70,34 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+#
+
+
+# Supabase'dan olingan PostgreSQL URL
+POSTGRES_URL = config('POSTGRES_URL_NON_POOLING')
+
+# URLni parchalash
+url = urlparse(POSTGRES_URL)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],  # URLdagi '/postgres' qismidan keyingi qism
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+        'OPTIONS': {
+            'sslmode': 'require',  # SSL rejimini yoqish
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
