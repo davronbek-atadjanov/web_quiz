@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Questions</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/question_list.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>MTA - Test Nazorat Savollari</h1>
+    </div>
+    <div class="container">
+        <form action="{% url 'submit-answers' %}" method="post">
+            {% csrf_token %}
+            {% for question in questions %}
+                <div class="card">
+                    <h3>Savol {{ forloop.counter }}</h3>
+                    <p>{{ question.question_text }}</p>
+                    <ul class="options">
+                        {% for option in question.options.all %}
+                            <li>
+                                <label>
+                                    <!-- Har bir savol uchun alohida name atributini berish -->
+                                    <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}">
+                                    {{ option.option_text }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            <button type="submit" class="submit-button">Javoblarni yuborish</button>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
+
+    <title>Test Natijalari</title>
+</head>
+<body>
+    <div class="result-card">
+        <h1>Natijalar</h1>
+        <p>Umumiy savollar soni: {{ total_questions }}</p>
+        <p>To'g'ri javoblar: {{ correct_answers }}</p>
+        <p>Noto'g'ri javoblar: {{ incorrect_answers }}</p>
+        <p>Ball: {{ score }}%</p>
+        <div class="button-container">
+            <a href="{% url 'question-list' %}">Yana test ishlash</a>
+        </div>
+    </div>
+</body>
+</html>
