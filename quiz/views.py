@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 
 def question_list(request):
     # 25 ta random savol olish
-    questions = Question.objects.all().order_by('?')[:25]
+    questions = Question.objects.all().order_by('?')[:15]
     context = {
         'questions': questions
     }
@@ -31,7 +31,7 @@ def submit_answers(request):
                     correct_answers += 1
 
         if total_questions != 0:
-            score = (correct_answers / 25) * 100
+            score = (correct_answers / 15) * 100
         else:
             score = 0
 
@@ -50,7 +50,7 @@ def result_view(request):
     correct_answers = request.session.get('correct_answers')
     score = request.session.get('score')
 
-    incorrect_answers = 25 - correct_answers
+    incorrect_answers = 15 - correct_answers
     context = {
         'total_questions': total_questions,
         'correct_answers': correct_answers,
