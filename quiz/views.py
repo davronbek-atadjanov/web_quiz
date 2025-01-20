@@ -1,39 +1,44 @@
-# views.py
+from random import sample
+
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from .models import Question, Option
 from django.http import HttpResponse, JsonResponse
 
 
 def question_list(request):
-    # 25 ta random savol olish
-    questions = Question.objects.all().order_by('?')[:15]
+    question_ids = list(Question.objects.values_list('id', flat=True))
+    random_ids = sample(question_ids, min(len(question_ids), 15))
+    questions = Question.objects.filter(id__in=random_ids)
+
     context = {
         'questions': questions
     }
     return render(request, 'questions/question_list.html', context)
-
 
 def submit_answers(request):
     if request.method == 'POST':
         correct_answers = 0
         total_questions = 0
 
-        questions = Question.objects.all()
+        user_answers = {
+            int(key.split('_')[1]): int(value)
+            for key, value in request.POST.items() if key.startswith('question_')
+        }
+        question_ids = user_answers.keys()
 
-        for question in questions:
-            user_answer = request.POST.get(f'question_{question.id}')
-            if user_answer:
-                total_questions += 1
-                selected_option_id = int(user_answer)
+        correct_options = Option.objects.filter(
+            Q(question_id__in=question_ids) & Q(is_correct=True)
+        ).values('question_id', 'id')
 
-                correct_option = question.options.filter(is_correct=True).first()
-                if correct_option and correct_option.id == selected_option_id:
-                    correct_answers += 1
+        correct_dict = {opt['question_id']: opt['id'] for opt in correct_options}
 
-        if total_questions != 0:
-            score = (correct_answers / 15) * 100
-        else:
-            score = 0
+        for question_id, selected_option_id in user_answers.items():
+            total_questions += 1
+            if correct_dict.get(question_id) == selected_option_id:
+                correct_answers += 1
+
+        score = (correct_answers / 15) * 100 if total_questions != 0 else 0
 
         request.session['total_questions'] = total_questions
         request.session['correct_answers'] = correct_answers
@@ -41,9 +46,7 @@ def submit_answers(request):
 
         return redirect('result-view')
 
-
     return JsonResponse({"error": "Faqat POST so'rovi qabul qilinadi!"}, status=405)
-
 
 def result_view(request):
     total_questions = request.session.get('total_questions')
