@@ -1,10 +1,20 @@
+{% load  static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quiz Questions {% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/question_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/subject_list.css' %}">
+
 </head>
 <body>
-$END$
+
+{% block content %}
+
+{% endblock content %}
 </body>
 </html>

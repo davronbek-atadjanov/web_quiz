@@ -1,18 +1,30 @@
 from random import sample
+from django.views.generic import ListView
+from .models import Subject
 
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, Option
 from django.http import HttpResponse, JsonResponse
 
+def subject_list(request):
+        subjects = Subject.objects.all()
 
-def question_list(request):
-    question_ids = list(Question.objects.values_list('id', flat=True))
+        context = {
+            "subjects": subjects
+        }
+        return render(request, 'questions/subject_list.html', context)
+
+def question_list(request, slug):
+    subject = get_object_or_404(Subject, slug=slug)
+    question_ids = list(Question.objects.filter(subject=subject).values_list('id', flat=True))
     random_ids = sample(question_ids, min(len(question_ids), 15))
     questions = Question.objects.filter(id__in=random_ids)
 
     context = {
-        'questions': questions
+        'questions': questions,
+        'selected_subject': slug,
+        'subject_name': subject.name
     }
     return render(request, 'questions/question_list.html', context)
 
@@ -53,7 +65,7 @@ def result_view(request):
     correct_answers = request.session.get('correct_answers')
     score = request.session.get('score')
 
-    incorrect_answers = 15 - correct_answers
+    incorrect_answers = total_questions - correct_answers
     context = {
         'total_questions': total_questions,
         'correct_answers': correct_answers,

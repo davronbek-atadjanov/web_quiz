@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'questions/base.html' %}
+{% load static %}
+
+{% block title %} Bosh sahifa {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Fanlar ro'yxati</h1>
+    <div class="card-container">
+        {% for subject in subjects %}
+            <div class="card">
+                <h3>{{ subject.name }}</h3>
+                <a href="{% url 'question-list-by-subject' subject.slug %}" class="card-button">Savollarni ko'rish</a>
+            </div>
+        {% empty %}
+            <p>Hech qanday fan mavjud emas.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

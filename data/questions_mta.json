@@ -7308,27 +7308,6 @@
         ]
     },
     {
-        "question_text": "Binar qidiruv daraxti nima?",
-        "options": [
-            {
-                "option_text": "Ma'lumotlar faqat bitta tugunda saqlanadi",
-                "is_correct": false
-            },
-            {
-                "option_text": "Har bir tugunda ikkita bola bo'ladi va ma'lumotlar tartiblanadi",
-                "is_correct": true
-            },
-            {
-                "option_text": "Ma'lumotlar faqat tartibda saqlanadi",
-                "is_correct": false
-            },
-            {
-                "option_text": "Har bir tugunda uchta bola bo'ladi",
-                "is_correct": false
-            }
-        ]
-    },
-    {
         "question_text": "Binar qidiruv daraxtida elementni qo'shish qanday amalga oshiriladi?",
         "options": [
             {
@@ -8757,27 +8736,6 @@
         ]
     },
     {
-        "question_text": "Grafni tasvirlash usullaridan qaysi biri qo‘shma matritsa orqali amalga oshiriladi?",
-        "options": [
-            {
-                "option_text": "Har bir tugun va uning qo‘shni tugunlari o'rtasidagi bog'lanishlarni matritsada ifodalash",
-                "is_correct": true
-            },
-            {
-                "option_text": "Faoliyatni faqat bir tugunda bajarish",
-                "is_correct": false
-            },
-            {
-                "option_text": "Faoliyatni tasodifiy amalga oshirish",
-                "is_correct": false
-            },
-            {
-                "option_text": "Faqat tugunlar o'rtasidagi masofalarni hisoblash",
-                "is_correct": false
-            }
-        ]
-    },
-    {
         "question_text": "Vektor ichidagi elementlarni teskari chiqarish qanday amalga oshiriladi?",
         "options": [
             {
@@ -8794,27 +8752,6 @@
             },
             {
                 "option_text": "clear()",
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question_text": "Xesh jadvali qanday ishlaydi?",
-        "options": [
-            {
-                "option_text": "Har bir ma'lumotni faqat bitta joyda saqlaydi",
-                "is_correct": false
-            },
-            {
-                "option_text": "Ma'lumotlarni tasodifiy tarzda saqlaydi",
-                "is_correct": false
-            },
-            {
-                "option_text": "Har bir ma'lumot uchun kalit orqali joy ajratadi",
-                "is_correct": true
-            },
-            {
-                "option_text": "Faqat ma'lumotlarni tartib bilan saqlaydi",
                 "is_correct": false
             }
         ]

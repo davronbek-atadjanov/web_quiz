@@ -1,79 +1,80 @@
 body {
-            font-family: Arial, sans-serif;
-            background-color: #e9f4fb;
-            margin: 0;
-            padding: 20px;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #e9f4fb;
+    margin: 0;
+    padding: 20px;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-        .card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 20px;
-        }
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
 
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #0078d7;
-        }
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #0078d7;
+}
 
-        .card p {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
+.card p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
 
-        .options {
-            list-style: none;
-            padding: 0;
-        }
+.options {
+    list-style: none;
+    padding: 0;
+}
 
-        .options li {
-            margin-bottom: 10px;
-        }
+.options li {
+    margin-bottom: 10px;
+}
 
-        .options li label {
-            font-size: 16px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
+.options li label {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 
-        .options li input {
-            margin-right: 10px;
-        }
+.options li input {
+    margin-right: 10px;
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .header h1 {
-            font-size: 24px;
-            color: #0078d7;
-        }
-        /* Tugma uslubi */
-        .submit-button {
-            background-color: #0078d7;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-            transition: background-color 0.3s ease;
-        }
+.header h1 {
+    font-size: 24px;
+    color: #0078d7;
+}
+/* Tugma uslubi */
+.submit-button {
+    background-color: #0078d7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
 
-        .submit-button:hover {
-            background-color: #005bb5;
-        }
+.submit-button:hover {
+    background-color: #005bb5;
+}
+

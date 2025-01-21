@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (django_test_mta)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (django_test_mta)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (web_quiz)" project-jdk-type="Python SDK" />
 </project>
