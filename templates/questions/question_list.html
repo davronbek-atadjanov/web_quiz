@@ -8,7 +8,7 @@
     <h1>{{subject_name}} - Test Nazorat Savollari</h1>
 </div>
 <div class="container">
-    <form action="{% url 'submit-answers' %}" method="post">
+    <form action="{% url 'submit-answers' slug=selected_subject %}" method="post">
         {% csrf_token %}
         {% for question in questions %}
             <div class="card">

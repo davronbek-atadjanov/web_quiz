@@ -5,12 +5,14 @@
 
 {% block content %}
 <div class="container">
-    <h1>Fanlar ro'yxati</h1>
-    <div class="card-container">
+    <h1 class="subject-h1">Fanlar ro'yxati</h1>
+    <div class="subject-card-container">
         {% for subject in subjects %}
-            <div class="card">
+            <div class="subject-card">
                 <h3>{{ subject.name }}</h3>
-                <a href="{% url 'question-list-by-subject' subject.slug %}" class="card-button">Savollarni ko'rish</a>
+                <a href="{% url 'question-list-by-subject' slug=subject.slug %}" class="subject-card-button">
+                    Savollarni ko'rish
+                </a>
             </div>
         {% empty %}
             <p>Hech qanday fan mavjud emas.</p>

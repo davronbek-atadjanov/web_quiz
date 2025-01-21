@@ -1,16 +1,5 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e9f4fb;
-    margin: 0;
-    padding: 20px;
-}
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-h1 {
+.subject-h1 {
     text-align: center;
     color: #0078d7;
     font-size: 32px;
@@ -18,14 +7,15 @@ h1 {
 }
 
 /* Kartochkalar uchun dizayn */
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(370px, 2fr));
-    gap: 50px;
-    justify-items: center;
+.subject-card-container {
+   display: flex;
+    flex-direction: column; /* This stacks the buttons vertically */
+    align-items: center;    /* Centers the buttons horizontally */
+    margin-top: 20px;
+    gap: 15px;
 }
 
-.card {
+.subject-card {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -37,24 +27,24 @@ h1 {
     max-width: 350px;
 }
 
-.card:hover {
+.subject-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.card h3 {
+.subject-card h3 {
     font-size: 24px;
     color: #0078d7;
     margin-bottom: 10px;
 }
 
-.card p {
+.subject-card p {
     font-size: 16px;
     color: #555;
     margin-bottom: 20px;
 }
 
-.card-button {
+.subject-card-button {
     background-color: #0078d7;
     color: #fff;
     border: none;
@@ -66,16 +56,16 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-.card-button:hover {
+.subject-card-button:hover {
     background-color: #005bb5;
 }
 
-.card-button:active {
+.subject-card-button:active {
     transform: translateY(2px);
 }
 
 /* Tugma hover va focus effektlari */
-.submit-button {
+.subject-submit-button {
     background-color: #0078d7;
     color: #fff;
     border: none;
@@ -88,6 +78,6 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
+.subject-card-button:hover {
     background-color: #005bb5;
 }
