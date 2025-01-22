@@ -175,3 +175,4 @@ cython_debug/
 db.sqlite3
 vercel.json
 Procfile
+staticfiles
