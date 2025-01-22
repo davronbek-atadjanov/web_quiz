@@ -1,20 +1,38 @@
 {% extends 'questions/base.html' %}
 {% load static %}
 {% block content %}
-  <div class="result-card div-text-center">
-        <h1>Natijalar</h1>
-        <p>Umumiy savollar soni: {{ total_questions }}</p>
-        <p>To'g'ri javoblar: {{ correct_answers }}</p>
-        <p>Noto'g'ri javoblar: {{ incorrect_answers }}</p>
-        <p>Ball: {{ score }}%</p>
-        <div class="button-container">
-            <a href="{% url 'question-list-by-subject' slug=slug %}" class="button">Yana test ishlash</a>
-            <a href="{% url 'subject_list' %}" class="button">Fanlar ro'yxatini ko'rish</a>
-
-        </div>
-       <div class="button-container">
-       </div>
-
+<div class="quiz-result-card quiz-result-container">
+    <h1>Natijalar</h1>
+    <p>Umumiy savollar soni: {{ total_questions }}</p>
+    <p>To'g'ri javoblar: {{ correct_answers }}</p>
+    <p>Noto'g'ri javoblar: {{ incorrect_answers }}</p>
+    <p>Ball: {{ score }}%</p>
+    <div class="quiz-button-container">
+        <a href="{% url 'question-list-by-subject' slug=slug %}" class="quiz-button">Yana test ishlash</a>
+        <a href="{% url 'subject_list' %}" class="quiz-button">Fanlar ro'yxatini ko'rish</a>
     </div>
+</div>
 
+{% if questions_with_details %}
+<div class="quiz-incorrect-questions">
+    <h2>Noto'g'ri javoblar:</h2>
+    {% for question in questions_with_details %}
+    <div class="quiz-card incorrect">
+        <h3>Savol:</h3>
+        <p>{{ question.text }}</p>
+        <ul class="quiz-options">
+            <li class="{% if question.selected_option == question.correct_option %}quiz-correct-answer{% else %}quiz-incorrect-answer{% endif %}">
+                <label>
+                    <input type="radio" checked disabled>
+                    Sizning javobingiz: {{ question.selected_option }}
+                </label>
+            </li>
+            <li class="quiz-correct-answer">
+                To'g'ri javob: {{ question.correct_option }}
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock content %}

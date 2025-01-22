@@ -37,8 +37,10 @@ def submit_answers(request, slug):
         quiz_count = 15
     else:
         quiz_count = 25
+
     if request.method == 'POST':
         correct_answers = 0
+        incorrect_answers_details = []
         user_answers = {
             int(key.split('_')[1]): int(value)
             for key, value in request.POST.items() if key.startswith('question_')
@@ -54,30 +56,52 @@ def submit_answers(request, slug):
         for question_id, selected_option_id in user_answers.items():
             if correct_dict.get(question_id) == selected_option_id:
                 correct_answers += 1
+            else:
+                question = Question.objects.get(id=question_id)
+                correct_option = Option.objects.get(question_id=question_id, is_correct=True)
+                selected_option = Option.objects.get(id=selected_option_id)
+                incorrect_answers_details.append({
+                    'question': question.question_text,
+                    'selected_option': selected_option.option_text,
+                    'correct_option': correct_option.option_text
+                })
 
         score = round((correct_answers / quiz_count) * 100, 2)
 
         request.session['correct_answers'] = correct_answers
         request.session['score'] = score
+        request.session['incorrect_answers_details'] = incorrect_answers_details
 
         return redirect('result-view', slug=slug)
 
     return JsonResponse({"error": "Faqat POST so'rovi qabul qilinadi!"}, status=405)
-
 def result_view(request, slug):
     if slug == "mta":
         quiz_count = 15
     else:
         quiz_count = 25
+
     correct_answers = request.session.get('correct_answers')
     score = request.session.get('score')
+    incorrect_answers_details = request.session.get('incorrect_answers_details', [])
 
     incorrect_answers = quiz_count - correct_answers
+    questions_with_details = []
+
+    for item in incorrect_answers_details:
+        question = {
+            'text': item['question'],
+            'selected_option': item['selected_option'],
+            'correct_option': item['correct_option'],
+        }
+        questions_with_details.append(question)
+
     context = {
         'total_questions': quiz_count,
         'correct_answers': correct_answers,
         'incorrect_answers': incorrect_answers,
         'score': score,
-        'slug':slug,
+        'questions_with_details': questions_with_details,
+        'slug': slug,
     }
     return render(request, 'questions/result.html', context)
