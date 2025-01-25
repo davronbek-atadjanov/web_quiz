@@ -24,7 +24,7 @@ def question_list(request, slug):
     question_ids = list(Question.objects.filter(subject=subject).values_list('id', flat=True))
     random_ids = sample(question_ids, min(len(question_ids), quiz_count))
     questions = Question.objects.filter(id__in=random_ids)
-
+    print(type(questions))
     context = {
         'questions': questions,
         'selected_subject': slug,
@@ -81,27 +81,33 @@ def result_view(request, slug):
     else:
         quiz_count = 25
 
-    correct_answers = request.session.get('correct_answers')
-    score = request.session.get('score')
-    incorrect_answers_details = request.session.get('incorrect_answers_details', [])
+    all_questions = []
+    question_ids = list(Question.objects.filter(subject__slug=slug).values_list('id', flat=True))
+    user_answers = request.session.get('user_answers', {})
+    correct_options = Option.objects.filter(
+        Q(question_id__in=question_ids) & Q(is_correct=True)
+    ).values('question_id', 'id')
 
-    incorrect_answers = quiz_count - correct_answers
-    questions_with_details = []
+    correct_dict = {opt['question_id']: opt['id'] for opt in correct_options}
 
-    for item in incorrect_answers_details:
-        question = {
-            'text': item['question'],
-            'selected_option': item['selected_option'],
-            'correct_option': item['correct_option'],
-        }
-        questions_with_details.append(question)
+    for question_id in question_ids:
+        question = Question.objects.get(id=question_id)
+        correct_option = Option.objects.get(question_id=question_id, is_correct=True).option_text
+        selected_option_id = user_answers.get(question_id)
+        selected_option = Option.objects.get(id=selected_option_id).option_text if selected_option_id else None
+        all_questions.append({
+            'text': question.question_text,
+            'selected_option': selected_option,
+            'correct_option': correct_option,
+            'correct': correct_dict.get(question_id) == selected_option_id
+        })
 
     context = {
         'total_questions': quiz_count,
-        'correct_answers': correct_answers,
-        'incorrect_answers': incorrect_answers,
-        'score': score,
-        'questions_with_details': questions_with_details,
+        'correct_answers': request.session.get('correct_answers', 0),
+        'incorrect_answers': quiz_count - request.session.get('correct_answers', 0),
+        'score': request.session.get('score', 0),
+        'all_questions': all_questions,
         'slug': slug,
     }
     return render(request, 'questions/result.html', context)

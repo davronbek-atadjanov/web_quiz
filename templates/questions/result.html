@@ -13,26 +13,30 @@
     </div>
 </div>
 
-{% if questions_with_details %}
-<div class="quiz-incorrect-questions">
-    <h2>Noto'g'ri javoblar:</h2>
-    {% for question in questions_with_details %}
-    <div class="quiz-card incorrect">
-        <h3>Savol:</h3>
+<div class="quiz-questions-container">
+    <h2>Barcha savollar:</h2>
+    {% for question in all_questions %}
+    <div class="quiz-card {% if question.correct %}correct{% else %}incorrect{% endif %}">
+        <h3>{{ forloop.counter }}. Savol:</h3>
         <p>{{ question.text }}</p>
         <ul class="quiz-options">
-            <li class="{% if question.selected_option == question.correct_option %}quiz-correct-answer{% else %}quiz-incorrect-answer{% endif %}">
-                <label>
-                    <input type="radio" checked disabled>
+            <li>
+                <span class="quiz-selected-option {% if question.correct %}correct{% else %}incorrect{% endif %}">
                     Sizning javobingiz: {{ question.selected_option }}
-                </label>
+                </span>
             </li>
-            <li class="quiz-correct-answer">
-                To'g'ri javob: {{ question.correct_option }}
+            <li>
+                <span class="quiz-correct-answer">
+                    To'g'ri javob: {{ question.correct_option }}
+                </span>
             </li>
         </ul>
+        {% if question.correct %}
+        <p class="quiz-correct-answer-label">Barakalla! To'g'ri javob berdingiz.</p>
+        {% else %}
+        <p class="quiz-incorrect-answer-label">Xato javob berdingiz. E’tiborliroq bo‘ling!</p>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
-{% endif %}
 {% endblock content %}

@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'ckeditor',
     'quiz',
 ]
 
@@ -127,8 +128,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR / 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -138,3 +138,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CSRF_TRUSTED_ORIGINS = [
 #     "https://*.ngrok-free.app",
 # ]
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',  # To'liq vosita panelini ko'rsatish
+        'height': 300,  # Redaktor balandligi
+        'width': '100%',  # Redaktor kengligi
+        'filebrowserUploadUrl': '/ckeditor/upload/',  # Fayl yuklash URL
+        'filebrowserImageUploadUrl': '/ckeditor/upload/',  # Rasm yuklash URL
+    },
+}
